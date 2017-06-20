@@ -6,9 +6,10 @@
 </head>
 <body>
 
-<div th:each="post : ${posts}">
-    <p th:text="${post.title}"></p>
-</div>
+<h1 th:each="post : ${posts}">
+    <h2>Title: <span th:text="${post.title}"></span></h2>
+    <h2>Body: <span th:text="${post.body}"></span></h2>
+</h1>
 
 
 

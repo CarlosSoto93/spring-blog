@@ -1,4 +1,4 @@
-package com.codeup.controllers;
+package com.codeup.models;
 
 /**
  * Created by Carlos on 6/19/17.
@@ -14,7 +14,7 @@ public class Post {
 
     public Post(String title, String body) {
         this.title = title;
-        this.title = body;
+        this.body = body;
     }
 
     public String getTitle() {

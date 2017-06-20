@@ -29,10 +29,10 @@ public class ViewController {
         int random3 = (int) (Math.random() * 6 + 1);
         int random4 = (int) (Math.random() * 6 + 1);
         int correctCount = 0;
-        model.addAttribute("dice1", random1 + ",");
-        model.addAttribute("dice2", random2 + ",");
-        model.addAttribute("dice3", random3 + ",");
-        model.addAttribute("dice4", random4 + ",");
+        model.addAttribute("dice1", random1);
+        model.addAttribute("dice2", random2);
+        model.addAttribute("dice3", random3);
+        model.addAttribute("dice4", random4);
 
 
         if (random1 == number) {
