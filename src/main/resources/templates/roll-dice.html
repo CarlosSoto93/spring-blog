@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Roll Dice</title>
 </head>
 <body>
@@ -16,10 +16,12 @@
     <a href="/roll-dice/5">5 </a>
     <a href="/roll-dice/6">6 </a>
 </h2>
+    <h2>Dice Numbers: <span th:text="${dice1}"></span> <span th:text="${dice2}"></span> <span
+            th:text="${dice3}"></span> <span th:text="${dice4}"></span></h2>
+    <h2>Your Number: <span th:text="${number}"></span></h2>
 
-<h2>Dice Number: <span th:text="${dice}">?</span> Your Number: <span th:text="${number}"></span></h2>
+    <div th:text="${message}"></div>
 
-<div th:text="${message}"></div>
 
 </body>
 </html>
