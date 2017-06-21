@@ -55,7 +55,12 @@ public class PostsController {
         return "posts/create";
     }
 
-
+    @GetMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, Model model) {
+        Post post = postSvc.findOne(id);
+        model.addAttribute("post", post);
+        return "posts/edit";
+    }
 
 
 
