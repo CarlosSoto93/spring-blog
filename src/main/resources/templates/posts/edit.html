@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head('Edit')" />
+<head th:replace="fragments :: head('Edit')"/>
 <body>
 
 <h1 class="text-center">Edit Post</h1>
 
-<form class="text-center form-group" action="edit" method="post" th:object="${post}">
-    <div th:replace="fragments :: post-form" />
+<form
+    class="text-center form-group"
+    th:action="${'/posts/' + post.id + '/edit'}"
+    method="post"
+    th:object="${post}"
+    th:include="fragments :: post-form">
 </form>
 
 </body>

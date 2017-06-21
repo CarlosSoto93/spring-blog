@@ -5,8 +5,12 @@
 
 <h1 class="text-center">Create Post</h1>
 
-<form class="text-center form-group" action="create" method="post" th:object="${post}">
-    <div th:replace="fragments :: post-form"/>
+<form
+    class="text-center form-group"
+    action="/posts/create"
+    method="post"
+    th:object="${post}"
+    th:include="fragments :: post-form">
 </form>
 
 </body>
