@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Index</title>
 </head>
 <body>
-
-<h1 th:each="post : ${posts}">
-    <h2>Title: <span th:text="${post.title}"></span></h2>
-    <h2>Body: <span th:text="${post.body}"></span></h2>
-</h1>
-
-
-
+<h1>Posts Index</h1>
+<h2 th:each="post : ${posts}">
+    Title: <span th:text="${post.title}"></span>
+    <br/>
+    Body: <span th:text="${post.body}"></span>
+</h2>
 </body>
 </html>

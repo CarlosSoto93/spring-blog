@@ -14,7 +14,7 @@ public class PostSvc {
     private List<Post> posts;
 
     public PostSvc() {
-        createAds();
+        createPosts();
     }
 
     public List<Post> findAll() {
@@ -22,7 +22,7 @@ public class PostSvc {
     }
 
     public Post save(Post post) {
-        post.setId(posts.size() + 1);
+        post.setId((long)posts.size() + 1);
         posts.add(post);
         return post;
     }
@@ -31,7 +31,7 @@ public class PostSvc {
         return posts.get((int)id - 1);
     }
 
-    private void createAds() {
+    private void createPosts() {
         posts = new ArrayList<>();
         save(new Post("Post One from Svcs", "First post in the index page"));
         save(new Post("Post Two from Svcs", "Second post in the index page"));

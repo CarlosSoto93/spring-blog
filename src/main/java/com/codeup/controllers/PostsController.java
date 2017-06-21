@@ -29,10 +29,6 @@ public class PostsController {
     public String post(Model model){
         List<Post> all = postSvc.findAll();
         model.addAttribute("posts", all);
-//        ArrayList<Post> posts = new ArrayList<>();
-//        posts.add(new Post("Post One", "First post in the index page"));
-//        posts.add(new Post("Post Two", "Second post in the index page"));
-//        model.addAttribute("posts", posts);
         return "posts/index";
     }
 
@@ -40,12 +36,6 @@ public class PostsController {
     public String postId(@PathVariable long id, Model model) {
         Post post = postSvc.findOne(id);
         model.addAttribute("post",post);
-//        Post post = new Post();
-//        post.setTitle("Single Post");
-//        post.setBody("This post is for the individual post page");
-//        model.addAttribute("post", post);
-//        model.addAttribute("id",id);
-
         return "posts/show";
     }
 

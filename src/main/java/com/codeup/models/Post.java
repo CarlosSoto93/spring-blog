@@ -4,13 +4,11 @@ package com.codeup.models;
  * Created by Carlos on 6/19/17.
  */
 public class Post {
-    private int id;
+    private long id;
     private String title;
     private String body;
 
     public Post(){
-        title = this.title;
-        body = this.body;
     }
 
     public Post(String title, String body) {
@@ -18,11 +16,11 @@ public class Post {
         this.body = body;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
