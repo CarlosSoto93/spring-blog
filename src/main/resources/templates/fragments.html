@@ -18,6 +18,7 @@
         <input id="body" class="form-control" type="text" name="body" th:field="*{body}"/>
         <br/>
         <button class="btn btn-primary">Submit</button>
+        <a th:href="${'/delete/' + post.id}" class="btn btn-danger">Delete</a>
     </div>
 </form>
 

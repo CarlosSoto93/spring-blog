@@ -22,13 +22,16 @@ public class PostSvc {
         return postsDao.findAll();
     }
 
-    public Post save(Post post) {
+    public void save(Post post) {
         postsDao.save(post);
-        return post;
     }
 
     public Post findOne(long id) {
         return postsDao.findOne(id);
+    }
+
+    public void deletePost(long id) {
+        postsDao.delete(id);
     }
 
 }

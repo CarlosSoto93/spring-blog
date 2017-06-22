@@ -5,10 +5,7 @@ import com.codeup.svcs.PostSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Carlos on 6/19/17.
@@ -23,7 +20,7 @@ public class PostsController {
     }
 
     @GetMapping("/posts")
-    public String post(Model model){
+    public String viewAll(Model model){
         Iterable<Post> all = postSvc.findAll();
         model.addAttribute("posts", all);
         return "posts/index";
@@ -62,21 +59,39 @@ public class PostsController {
         return "posts/edit";
     }
 
+//    @PostMapping("/posts/{id}/edit")
+//    public String postEdit(
+//            @PathVariable long id,
+//            @RequestParam(name = "title") String title,
+//            @RequestParam(name = "body") String body,
+//            Model model
+//    ) {
+//        Post post = postSvc.findOne(id);
+//        post.setTitle(title);
+//        post.setBody(body);
+//        postSvc.save(post);
+//        model.addAttribute("post", post);
+//        return "posts/edit";
+//    }
+
     @PostMapping("/posts/{id}/edit")
-    public String postEdit(
-            @PathVariable long id,
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body,
-            Model model
-    ) {
-        Post post = postSvc.findOne(id);
-        post.setTitle(title);
-        post.setBody(body);
+    public String postEdit(@ModelAttribute Post post) {
         postSvc.save(post);
-        model.addAttribute("post", post);
-        return "posts/edit";
+        return "redirect:/posts/" + post.getId();
     }
 
+//    @GetMapping("/delete/{id}")
+//    public String deletePost(@PathVariable long id) {
+//        postSvc.deletePost(id);
+////        postSvc.deletePost(post);
+//        return"redirect;/posts";
+//    }
 
+    @PostMapping("/delete/{id}")
+    public String deletePost(@ModelAttribute Post post, Model model) {
+        postSvc.deletePost(post.getId());
+        model.addAttribute("msg","Your post was deleted correctly");
+        return "posts/index";
+    }
 
 }
