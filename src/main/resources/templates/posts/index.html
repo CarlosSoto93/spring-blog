@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: head('Index')" />
+<head th:replace="fragments :: head('Index')"/>
 <body>
-<h1>Posts Index</h1>
-<h2 th:each="post : ${posts}">
-    Title: <span th:text="${post.title}"></span>
-    <br/>
-    Body: <span th:text="${post.body}"></span>
-</h2>
+<nav th:replace="fragments :: my-navbar"/>
+<div class="container text-center">
+    <h1>Posts Index</h1>
+    <h2 th:each="post : ${posts}">
+        <div>
+            Title: <a th:href="${'/posts/' + post.id}"><span th:text="${post.title}"></span></a>
+            <br/>
+            Body: <span th:text="${post.body}"></span>
+        </div>
+    </h2>
+</div>
 </body>
 </html>
+

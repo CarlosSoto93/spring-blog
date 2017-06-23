@@ -33,9 +33,9 @@ public class PostsController {
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
         Post post = postSvc.findOne(id);
-        User user = post.getUser();
-        model.addAttribute("user",user);
+        User user = userSvc.findOne(post.getUser().getId());
         model.addAttribute("post",post);
+        model.addAttribute("user",user);
         return "posts/show";
     }
 
@@ -52,9 +52,8 @@ public class PostsController {
             @RequestParam(name = "body") String body,
             Model model
     ) {
-        Post post = new Post(title, body);
-        User user = userSvc.findOne(1);
-        post.setUser(user);
+        User user = userSvc.findOne(1L);
+        Post post = new Post(title, body, user);
         postSvc.save(post);
         model.addAttribute("post", post);
         return "redirect:/posts/" + post.getId();
@@ -73,7 +72,7 @@ public class PostsController {
         return "redirect:/posts/" + post.getId();
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deletePost(@ModelAttribute Post post, Model model) {
         postSvc.deletePost(post.getId());
 //        model.addAttribute("msg","Your post was deleted correctly");
