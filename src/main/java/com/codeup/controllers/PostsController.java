@@ -1,6 +1,7 @@
 package com.codeup.controllers;
 
 import com.codeup.models.Post;
+import com.codeup.models.User;
 import com.codeup.svcs.PostSvc;
 import com.codeup.svcs.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class PostsController {
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
         Post post = postSvc.findOne(id);
+        User user = post.getUser();
+        model.addAttribute("user",user);
         model.addAttribute("post",post);
         return "posts/show";
     }
@@ -50,9 +53,11 @@ public class PostsController {
             Model model
     ) {
         Post post = new Post(title, body);
+        User user = userSvc.findOne(1);
+        post.setUser(user);
         postSvc.save(post);
         model.addAttribute("post", post);
-        return "posts/create";
+        return "redirect:/posts/" + post.getId();
     }
 
     @GetMapping("/posts/{id}/edit")
@@ -62,39 +67,17 @@ public class PostsController {
         return "posts/edit";
     }
 
-//    @PostMapping("/posts/{id}/edit")
-//    public String postEdit(
-//            @PathVariable long id,
-//            @RequestParam(name = "title") String title,
-//            @RequestParam(name = "body") String body,
-//            Model model
-//    ) {
-//        Post post = postSvc.findOne(id);
-//        post.setTitle(title);
-//        post.setBody(body);
-//        postSvc.save(post);
-//        model.addAttribute("post", post);
-//        return "posts/edit";
-//    }
-
     @PostMapping("/posts/{id}/edit")
     public String postEdit(@ModelAttribute Post post) {
         postSvc.save(post);
         return "redirect:/posts/" + post.getId();
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deletePost(@PathVariable long id) {
-//        postSvc.deletePost(id);
-////        postSvc.deletePost(post);
-//        return"redirect;/posts";
-//    }
-
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deletePost(@ModelAttribute Post post, Model model) {
         postSvc.deletePost(post.getId());
-        model.addAttribute("msg","Your post was deleted correctly");
-        return "posts/index";
+//        model.addAttribute("msg","Your post was deleted correctly");
+        return "redirect:/posts";
     }
 
 }
