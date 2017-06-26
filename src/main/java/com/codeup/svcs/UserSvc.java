@@ -1,7 +1,7 @@
 package com.codeup.svcs;
 
 import com.codeup.models.User;
-import com.codeup.repositories.UserRepositories;
+import com.codeup.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service("userSvc")
 public class UserSvc {
 
-    private UserRepositories userDao;
+    private UsersRepository userDao;
 
     @Autowired
-    public UserSvc(UserRepositories userDao) {
+    public UserSvc(UsersRepository userDao) {
         this.userDao = userDao;
     }
 

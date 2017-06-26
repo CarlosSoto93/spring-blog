@@ -46,7 +46,7 @@
             <!--<a th:href="${'/delete/' + post.id}" class="btn btn-danger">Delete</a>-->
         </div>
     </form>
-\
+
     <div class="row text-center">
         <form th:action="@{/delete/{id}(id=${post.id})}" method="post" class="col-md-6 col-md-offset-3">
             <button class="btn btn-danger">Delete</button>

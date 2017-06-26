@@ -1,7 +1,7 @@
 package com.codeup.svcs;
 
 import com.codeup.models.Post;
-import com.codeup.repositories.PostsRepositories;
+import com.codeup.repositories.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service("postSvc")
 public class PostSvc {
 
-    private PostsRepositories postsDao;
+    private PostsRepository postsDao;
 
     @Autowired
-    public PostSvc(PostsRepositories postsDao) {
+    public PostSvc(PostsRepository postsDao) {
         this.postsDao = postsDao;
     }
 

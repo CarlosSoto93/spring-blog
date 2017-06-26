@@ -5,10 +5,10 @@
 <nav th:replace="fragments :: my-navbar"/>
 
 <h1> Title: <span th:text="${post.getTitle()}"></span></h1>
-<a th:href="${'/posts/' + post.id + '/edit'}"> edit</a>
-<p>Post ID: <span th:text="${post.getId()}"></span></p>
-<p>Email user: <span th:text="${user.getEmail()}"></span></p>
-<p><span th:text="${post.getBody()}"></span></p>
+<a th:href="${'/posts/' + post.id + '/edit'}"><h4>edit</h4></a>
+<h3>Post ID: <span th:text="${post.getId()}"></span></h3>
+<h3>Email user: <span th:text="${user.getEmail()}"></span></h3>
+<h3><span th:text="${post.getBody()}"></span></h3>
 
 </body>
 </html>
