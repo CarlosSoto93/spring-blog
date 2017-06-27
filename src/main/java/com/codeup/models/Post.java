@@ -1,6 +1,9 @@
 package com.codeup.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Carlos on 6/19/17.
@@ -14,9 +17,12 @@ public class Post {
     private long id;
 
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "Ads must have a title")
+    @Size(min = 3, message = "A title must be at least 3 characters.")
     private String title;
 
     @Column(nullable = false, columnDefinition = "text")
+    @NotBlank(message = "Ads must have a description")
     private String body;
 
     @OneToOne

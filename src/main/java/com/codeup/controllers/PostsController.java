@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 /**
  * Created by Carlos on 6/19/17.
@@ -51,12 +54,28 @@ public class PostsController {
     }
 
     @PostMapping("/posts/create")
-    public String postCreate(@ModelAttribute Post newPost, Model model) {
+    public String postCreate(
+            @Valid Post Post,
+            Errors validation,
+            Model model
+    ) {
+        if (Post.getTitle().endsWith("?")) {
+            validation.rejectValue(
+                    "title",
+                    "post.title",
+                    "You can't be unsure about your title!"
+            );
+        }
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("post", Post);
+            return "posts/create";
+        }
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Post post = new Post(newPost.getTitle(), newPost.getBody(), user);
-        postSvc.save(post);
-        model.addAttribute("post", post);
-        return "redirect:/posts/" + post.getId();
+        Post.setUser(user);
+        postSvc.save(Post);
+        model.addAttribute("post", Post);
+        return "redirect:/posts/" + Post.getId();
     }
 
     @GetMapping("/posts/{id}/edit")
