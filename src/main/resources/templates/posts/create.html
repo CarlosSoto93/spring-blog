@@ -8,8 +8,8 @@
 
 <form
     class="text-center form-group"
-    action="/posts/create"
-    method="post"
+    th:action="@{/posts/create}"
+    th:method="post"
     th:object="${post}"
     th:include="fragments :: post-form">
 </form>

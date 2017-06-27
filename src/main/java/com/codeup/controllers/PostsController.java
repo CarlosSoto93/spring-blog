@@ -5,9 +5,13 @@ import com.codeup.models.User;
 import com.codeup.svcs.PostSvc;
 import com.codeup.svcs.UserSvc;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Created by Carlos on 6/19/17.
@@ -47,13 +51,9 @@ public class PostsController {
     }
 
     @PostMapping("/posts/create")
-    public String postCreate(
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body,
-            Model model
-    ) {
-        User user = userSvc.findOne(1L);
-        Post post = new Post(title, body, user);
+    public String postCreate(@ModelAttribute Post newPost, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post post = new Post(newPost.getTitle(), newPost.getBody(), user);
         postSvc.save(post);
         model.addAttribute("post", post);
         return "redirect:/posts/" + post.getId();

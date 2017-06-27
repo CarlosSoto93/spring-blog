@@ -25,15 +25,16 @@
                 <li>
                     <a href="/posts/create">Create</a>
                 </li>
+                <li>
+                    <a href="/login">Log In</a>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
 
     </div><!-- /.container-fluid -->
 </nav>
 
-<div th:fragment="post-form">
-
-    <form class="row">
+    <form   th:fragment="post-form" class="row">
         <div class="col-md-8 col-md-offset-2">
             <label for="title">Title</label>
             <input id="title" class="form-control" type="text" name="title" th:field="*{title}"/>
@@ -43,16 +44,11 @@
             <input type="hidden" th:field="*{user}"/>
             <br/>
             <button class="btn btn-primary">Submit</button>
-            <!--<a th:href="${'/delete/' + post.id}" class="btn btn-danger">Delete</a>-->
         </div>
     </form>
 
-    <div class="row text-center">
-        <form th:action="@{/delete/{id}(id=${post.id})}" method="post" class="col-md-6 col-md-offset-3">
-            <button class="btn btn-danger">Delete</button>
-        </form>
-    </div>
-</div>
+
+
 
 <!--<div th:fragment="post-form" class="row">-->
     <!--<form id="form">-->
